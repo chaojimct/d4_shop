@@ -1,0 +1,30 @@
+root密码 ce88290b
+
+
+<li class="">
+
+	<a href="department_edit.jsp">
+
+	<i class="icon-cogs"></i> 
+
+	<span class="title">部门管理</span>
+
+	<span class="arrow "></span>
+
+	</a>
+
+	<ul class="sub-menu">
+
+		<li >
+
+			<a href="layout_horizontal_sidebar_menu.jsp">
+
+			Horzontal & Sidebar Menu</a>
+
+		</li>
+
+		<li >
+
+	</ul>
+
+</li>

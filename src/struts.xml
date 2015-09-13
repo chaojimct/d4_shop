@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+	<constant name="struts.action.extension" value="do,action,,"></constant>
+	<constant name="struts.multipart.maxSize" value="1000000000" />
+	
+	
+     
+
+    <package name="default" namespace="/" extends="struts-default">
+    	
+    	<interceptors>
+
+	       <interceptor name="login" class="com.interceptor.CheckLoginInterceptor"/>
+	       <interceptor name="checkAuthority" class="com.interceptor.AuthorityInterceptor"/>
+		   <interceptor-stack name="teamwareStack">
+
+                <interceptor-ref name="login"/>
+                
+                <interceptor-ref name="checkAuthority"/>
+
+                <interceptor-ref name="defaultStack"/>
+
+            </interceptor-stack>
+            
+	      
+	
+	    </interceptors>
+	    
+	  <default-interceptor-ref name="teamwareStack"></default-interceptor-ref>
+	    <global-results>
+            <result name="toMessage">/common/showMessage.jsp</result>
+           
+        </global-results>
+	    <action name="uuu" class="com.action.UploadAction">
+	       <!--  <interceptor-ref name="basicStack"/>
+	        <interceptor-ref name="fileUpload">
+	            <param name="maximumSize">500000</param>
+	        </interceptor-ref>
+	        <interceptor-ref name="validation"/>
+	        <interceptor-ref name="workflow"/> -->
+	 		<interceptor-ref name="fileUpload">
+
+           	</interceptor-ref>
+	 		 <interceptor-ref name="defaultStack"/>
+	        <result name="success">index.jsp</result>
+        </action>
+        <action name="upload" class="cn.myaction.UploadAction">
+    	 <!-- <interceptor-ref name="fileUpload">
+    	 	<param name="maximumSize">1024*1024*5</param>
+    	 	<param name="allowedExtensions">jpg,rar,7z,zip</param>
+    	 </interceptor-ref>
+     	<interceptor-ref name="basicStack"/> -->
+    		<result>success.jsp</result>
+    		<result name="input">error.jsp</result>
+    	</action>
+    	<action name="download" class="com.action.DownloadAction">
+    		<result type="stream">
+    			<param name="contentType">image/jpg</param>
+    			<param name="contentDisposition">
+    				attachment;filename="${fname}"
+    			</param>
+    			<param name="inputName">inputStream</param>
+    		</result>
+    		
+    	</action>
+    	
+        <action name="*_*" class="com.action.{1}Action" method="{2}">
+        	
+			<result name="add_car_su">shoppingCar.jsp</result>
+        	<result name="user_edit">user_edit.jsp</result>
+        	<result name="department_edit">department_edit.jsp</result>
+        	<result name="artist_edit">artist_edit.jsp</result>
+        	<result name="customer_edit">customer_edit.jsp</result>
+        	<result name="employee_edit">employee_edit.jsp</result>
+        	<result name="Logistics_edit">logistics_edit.jsp</result>
+        	<result name="log_show">show_log.jsp</result>
+        	
+        	<result name="contract_edit">contract_edit.jsp</result>
+        	<result name="contract_set">contract_set.jsp</result>
+        	<result name="login.jsp">login.jsp</result>
+        	
+        	
+        </action>
+      </package>
+</struts>
